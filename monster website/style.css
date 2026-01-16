@@ -1,0 +1,1341 @@
+/* ============================================
+   MONSTER ENERGY SCROLL WEBSITE - STYLES
+   Cinematic Dark Theme with Scroll Animations
+   ============================================ */
+
+/* ============================================
+   CSS CUSTOM PROPERTIES
+   ============================================ */
+:root {
+    /* Core Colors */
+    --black: #000000;
+    --dark-bg: #0a0a0a;
+    --dark-surface: #111111;
+    --white: #ffffff;
+    --white-soft: rgba(255, 255, 255, 0.9);
+
+    /* Dragon Tea Theme */
+    --dragon-primary: #9b4dca;
+    --dragon-secondary: #7b2cbf;
+    --dragon-glow: rgba(155, 77, 202, 0.6);
+    --dragon-bg: linear-gradient(135deg, #1a0a20 0%, #0d0512 50%, #0a0a0a 100%);
+
+    /* Zero Ultra Theme */
+    --zero-primary: #e8e8e8;
+    --zero-secondary: #c0c0c0;
+    --zero-glow: rgba(255, 255, 255, 0.4);
+    --zero-bg: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 50%, #0a0a0a 100%);
+
+    /* Cotton Candy Theme */
+    --cotton-primary: #00d4ff;
+    --cotton-secondary: #a855f7;
+    --cotton-glow: rgba(0, 212, 255, 0.5);
+    --cotton-bg: linear-gradient(135deg, #0a1628 0%, #120a20 50%, #0a0a0a 100%);
+
+    /* Mango Loco Theme */
+    --mango-primary: #fbbf24;
+    --mango-secondary: #0ea5e9;
+    --mango-glow: rgba(251, 191, 36, 0.5);
+    --mango-bg: linear-gradient(135deg, #0c1929 0%, #0a1520 50%, #0a0a0a 100%);
+
+    /* Typography */
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Spacing */
+    --section-height: 100vh;
+
+    /* Transitions */
+    --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--dark-bg);
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* ============================================
+   VIGNETTE OVERLAY
+   ============================================ */
+.vignette-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+/* ============================================
+   PARTICLES CONTAINER
+   ============================================ */
+#particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: floatParticle 8s ease-in-out infinite;
+}
+
+@keyframes floatParticle {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100vh) translateX(20px);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   SECTION BASE STYLES
+   ============================================ */
+.section {
+    position: relative;
+    min-height: var(--section-height);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.section-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: opacity 0.8s var(--transition-smooth);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero-section {
+    background: var(--dragon-bg);
+}
+
+.hero-section .section-bg {
+    background:
+        radial-gradient(ellipse at 30% 80%, rgba(155, 77, 202, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 20%, rgba(123, 44, 191, 0.1) 0%, transparent 40%),
+        var(--dragon-bg);
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem;
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.9;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    animation: titleReveal 1.5s var(--transition-smooth) forwards;
+}
+
+.title-line {
+    display: block;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: lineReveal 0.8s var(--transition-smooth) forwards;
+}
+
+.title-line:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.title-line:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.title-line.accent {
+    background: linear-gradient(90deg, var(--dragon-primary), var(--cotton-primary), var(--mango-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+@keyframes lineReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeIn 1s var(--transition-smooth) 0.8s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s var(--transition-smooth) 1.2s forwards, bounce 2s ease-in-out 2s infinite;
+}
+
+.mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 13px;
+    position: relative;
+}
+
+.wheel {
+    width: 4px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollWheel 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollWheel {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(10px);
+        opacity: 0.3;
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.scroll-indicator span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
+   CAN WRAPPER & ANIMATIONS
+   ============================================ */
+.can-wrapper {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    perspective: 1000px;
+}
+
+.hero-can {
+    animation: none;
+}
+
+/* Idle Floating Animation for All Cans */
+@keyframes idleFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotateY(0deg) rotateZ(0deg);
+    }
+
+    25% {
+        transform: translateY(-12px) rotateY(3deg) rotateZ(1deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotateY(0deg) rotateZ(-1deg);
+    }
+
+    75% {
+        transform: translateY(-12px) rotateY(-3deg) rotateZ(0.5deg);
+    }
+}
+
+.can-image {
+    width: 280px;
+    height: auto;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+    transition: transform 0.6s var(--transition-smooth);
+    transform-style: preserve-3d;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    animation: idleFloat 4s ease-in-out infinite;
+}
+
+.can-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 400px;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    z-index: -1;
+    transition: all 0.5s var(--transition-smooth);
+}
+
+.dragon-glow {
+    background: var(--dragon-glow);
+}
+
+.zero-glow {
+    background: var(--zero-glow);
+}
+
+.cotton-glow {
+    background: var(--cotton-glow);
+}
+
+.mango-glow {
+    background: var(--mango-glow);
+}
+
+.can-reflection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.1) 45%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 55%, transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.can-wrapper:hover .can-reflection {
+    opacity: 1;
+}
+
+/* Can Animation States */
+.can-wrapper.entering-left {
+    animation: enterFromLeft 0.8s var(--transition-smooth) forwards;
+}
+
+.can-wrapper.entering-right {
+    animation: enterFromRight 0.8s var(--transition-smooth) forwards;
+}
+
+.can-wrapper.exiting-left {
+    animation: exitToLeft 0.6s var(--transition-smooth) forwards;
+}
+
+.can-wrapper.exiting-right {
+    animation: exitToRight 0.6s var(--transition-smooth) forwards;
+}
+
+@keyframes enterFromLeft {
+    from {
+        transform: translateY(-50%) translateX(-200%) rotateY(-30deg) rotateZ(-15deg);
+        opacity: 0;
+        filter: blur(10px);
+    }
+
+    to {
+        transform: translateY(-50%) translateX(0) rotateY(0) rotateZ(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes enterFromRight {
+    from {
+        transform: translateY(-50%) translateX(200%) rotateY(30deg) rotateZ(15deg);
+        opacity: 0;
+        filter: blur(10px);
+    }
+
+    to {
+        transform: translateY(-50%) translateX(0) rotateY(0) rotateZ(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes exitToLeft {
+    from {
+        transform: translateY(-50%) translateX(0) rotateY(0) rotateZ(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    to {
+        transform: translateY(-50%) translateX(-200%) rotateY(-30deg) rotateZ(-15deg);
+        opacity: 0;
+        filter: blur(10px);
+    }
+}
+
+@keyframes exitToRight {
+    from {
+        transform: translateY(-50%) translateX(0) rotateY(0) rotateZ(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    to {
+        transform: translateY(-50%) translateX(200%) rotateY(30deg) rotateZ(15deg);
+        opacity: 0;
+        filter: blur(10px);
+    }
+}
+
+/* Scroll-driven roll animation */
+.can-image.rolling {
+    animation: rollCan 0.5s linear;
+}
+
+@keyframes rollCan {
+    0% {
+        transform: rotateY(0deg) rotateZ(0deg);
+    }
+
+    25% {
+        transform: rotateY(10deg) rotateZ(5deg);
+    }
+
+    50% {
+        transform: rotateY(0deg) rotateZ(0deg);
+    }
+
+    75% {
+        transform: rotateY(-10deg) rotateZ(-5deg);
+    }
+
+    100% {
+        transform: rotateY(0deg) rotateZ(0deg);
+    }
+}
+
+/* ============================================
+   FLAVOR SECTIONS
+   ============================================ */
+.flavor-section {
+    position: relative;
+}
+
+.flavor-section .content-wrapper {
+    position: absolute;
+    left: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: left;
+    max-width: 500px;
+}
+
+.flavor-info {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s var(--transition-smooth);
+}
+
+.flavor-section.active .flavor-info {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.flavor-tag {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.flavor-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 1;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    transition: color 0.5s ease;
+}
+
+.flavor-description {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.flavor-details {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.detail-item {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-left: 1rem;
+    border-left: 2px solid currentColor;
+    transition: color 0.3s ease;
+}
+
+/* Dragon Tea Section Specifics */
+[data-flavor="dragon"] .flavor-title {
+    color: var(--dragon-primary);
+}
+
+[data-flavor="dragon"] .detail-item {
+    border-color: var(--dragon-primary);
+}
+
+[data-flavor="dragon"] .section-bg {
+    background: var(--dragon-bg);
+}
+
+.dragon-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(ellipse at 25% 75%, rgba(155, 77, 202, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 75% 25%, rgba(123, 44, 191, 0.15) 0%, transparent 40%);
+}
+
+.dragon-scales {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(45deg,
+            transparent,
+            transparent 20px,
+            rgba(155, 77, 202, 0.02) 20px,
+            rgba(155, 77, 202, 0.02) 40px);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Zero Ultra Section Specifics */
+[data-flavor="zero"] .flavor-title {
+    color: var(--zero-primary);
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+[data-flavor="zero"] .detail-item {
+    border-color: var(--zero-secondary);
+}
+
+[data-flavor="zero"] .section-bg {
+    background: var(--zero-bg);
+}
+
+.zero-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(ellipse at 60% 40%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 40% 60%, rgba(200, 200, 200, 0.05) 0%, transparent 40%);
+}
+
+/* Cotton Candy Section Specifics */
+[data-flavor="cotton"] .flavor-title {
+    background: linear-gradient(90deg, var(--cotton-primary), var(--cotton-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+[data-flavor="cotton"] .detail-item {
+    border-color: var(--cotton-primary);
+}
+
+[data-flavor="cotton"] .section-bg {
+    background: var(--cotton-bg);
+}
+
+.cotton-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(ellipse at 20% 80%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+}
+
+.electric-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(ellipse at 70% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 30%);
+    z-index: 2;
+    pointer-events: none;
+    animation: electricPulse 3s ease-in-out infinite;
+}
+
+@keyframes electricPulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Mango Loco Section Specifics */
+[data-flavor="mango"] .flavor-title {
+    color: var(--mango-primary);
+}
+
+[data-flavor="mango"] .detail-item {
+    border-color: var(--mango-primary);
+}
+
+[data-flavor="mango"] .section-bg {
+    background: var(--mango-bg);
+}
+
+.mango-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(ellipse at 30% 70%, rgba(251, 191, 36, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 30%, rgba(14, 165, 233, 0.15) 0%, transparent 40%);
+}
+
+/* ============================================
+   SMOKE & MIST EFFECTS
+   ============================================ */
+.smoke-container,
+.mist-container,
+.vapor-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.smoke {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: smokeDrift 15s ease-in-out infinite;
+}
+
+.smoke.purple {
+    background: radial-gradient(ellipse at center, rgba(155, 77, 202, 0.15) 0%, transparent 70%);
+}
+
+.smoke-1 {
+    top: 20%;
+    left: -10%;
+    animation-delay: 0s;
+}
+
+.smoke-2 {
+    top: 50%;
+    right: -10%;
+    animation-delay: -5s;
+}
+
+.smoke-3 {
+    bottom: 10%;
+    left: 30%;
+    animation-delay: -10s;
+}
+
+@keyframes smokeDrift {
+
+    0%,
+    100% {
+        transform: translateX(0) translateY(0) scale(1);
+        opacity: 0.5;
+    }
+
+    25% {
+        transform: translateX(50px) translateY(-30px) scale(1.1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: translateX(100px) translateY(0) scale(1);
+        opacity: 0.5;
+    }
+
+    75% {
+        transform: translateX(50px) translateY(30px) scale(0.9);
+        opacity: 0.3;
+    }
+}
+
+.mist {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    animation: mistFlow 10s ease-in-out infinite;
+}
+
+.mist-1 {
+    top: 30%;
+    animation-delay: 0s;
+}
+
+.mist-2 {
+    top: 60%;
+    animation-delay: -5s;
+}
+
+@keyframes mistFlow {
+
+    0%,
+    100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateX(100%);
+        opacity: 0.8;
+    }
+}
+
+.vapor {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(60px);
+    animation: vaporRise 12s ease-in-out infinite;
+}
+
+.vapor-1 {
+    background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.2) 0%, transparent 70%);
+    bottom: -100px;
+    left: 20%;
+}
+
+.vapor-2 {
+    background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
+    bottom: -100px;
+    right: 20%;
+    animation-delay: -4s;
+}
+
+.vapor-3 {
+    background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+    bottom: -100px;
+    left: 50%;
+    animation-delay: -8s;
+}
+
+@keyframes vaporRise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    80% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-120vh) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Mango Festival Effects */
+.festival-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.mango-slice {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(ellipse at center, rgba(251, 191, 36, 0.3) 0%, rgba(251, 191, 36, 0.1) 50%, transparent 70%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    filter: blur(2px);
+    animation: floatMango 8s ease-in-out infinite;
+}
+
+.slice-1 {
+    top: 20%;
+    left: 15%;
+    animation-delay: 0s;
+}
+
+.slice-2 {
+    top: 60%;
+    left: 5%;
+    animation-delay: -3s;
+    width: 40px;
+    height: 40px;
+}
+
+.slice-3 {
+    top: 40%;
+    left: 25%;
+    animation-delay: -6s;
+    width: 50px;
+    height: 50px;
+}
+
+@keyframes floatMango {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(15deg);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   CTA SECTION
+   ============================================ */
+.cta-section {
+    min-height: 100vh;
+    background: var(--dark-bg);
+}
+
+.cta-section .section-bg {
+    background:
+        radial-gradient(ellipse at 50% 50%, rgba(155, 77, 202, 0.1) 0%, transparent 40%),
+        radial-gradient(ellipse at 30% 70%, rgba(0, 212, 255, 0.08) 0%, transparent 30%),
+        radial-gradient(ellipse at 70% 30%, rgba(251, 191, 36, 0.08) 0%, transparent 30%),
+        var(--dark-bg);
+}
+
+.cosmic-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.2), transparent),
+        radial-gradient(1px 1px at 50px 160px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.2), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 160px 120px, rgba(255, 255, 255, 0.2), transparent);
+    background-size: 200px 200px;
+    animation: starTwinkle 4s ease-in-out infinite;
+    z-index: 2;
+}
+
+@keyframes starTwinkle {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.cta-section .content-wrapper {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 2rem;
+}
+
+.cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 7rem);
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, var(--dragon-primary), var(--cotton-primary), var(--mango-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cta-subtitle {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 3rem;
+}
+
+.all-cans-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}
+
+.cta-can {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Can Image - Resting State */
+.cta-can img {
+    width: 120px;
+    height: auto;
+    transform: translateY(0) scale(1);
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
+    transition:
+        transform 0.5s cubic-bezier(0.33, 1, 0.68, 1),
+        filter 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    will-change: transform, filter;
+}
+
+/* HOVER: Real Upward Lift + Floating Animation */
+.cta-can:hover img {
+    transform: translateY(-14px) scale(1.04);
+    filter: drop-shadow(0 22px 40px rgba(0, 0, 0, 0.45));
+    animation: ctaIdleFloat 3s ease-in-out infinite;
+}
+
+/* Zero-Gravity Floating (while mouse is over can) */
+@keyframes ctaIdleFloat {
+
+    0%,
+    100% {
+        transform: translateY(-14px) scale(1.04) rotateZ(0deg);
+    }
+
+    50% {
+        transform: translateY(-22px) scale(1.04) rotateZ(0.5deg);
+    }
+}
+
+/* Flavor-Specific Hover Glows */
+.cta-can[data-can="dragon"]:hover img {
+    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5)) drop-shadow(0 10px 40px rgba(155, 77, 202, 0.4));
+}
+
+.cta-can[data-can="zero"]:hover img {
+    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5)) drop-shadow(0 10px 40px rgba(255, 255, 255, 0.3));
+}
+
+.cta-can[data-can="cotton"]:hover img {
+    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5)) drop-shadow(0 10px 40px rgba(0, 212, 255, 0.4));
+}
+
+.cta-can[data-can="mango"]:hover img {
+    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5)) drop-shadow(0 10px 40px rgba(251, 191, 36, 0.4));
+}
+
+/* Label Styling */
+.can-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.6);
+    transition:
+        color 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+        transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+        text-shadow 0.4s ease;
+}
+
+.cta-can:hover .can-label {
+    color: var(--white);
+    transform: translateY(-3px);
+}
+
+/* Flavor-Specific Label Colors on Hover */
+.cta-can[data-can="dragon"]:hover .can-label {
+    color: var(--dragon-primary);
+    text-shadow: 0 0 20px rgba(155, 77, 202, 0.5);
+}
+
+.cta-can[data-can="zero"]:hover .can-label {
+    color: var(--zero-primary);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+.cta-can[data-can="cotton"]:hover .can-label {
+    color: var(--cotton-primary);
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+.cta-can[data-can="mango"]:hover .can-label {
+    color: var(--mango-primary);
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+}
+
+/* ============================================
+   CLICK TO FOCUS STATES
+   ============================================ */
+
+/* Container when a can is focused */
+.all-cans-container.has-focus {
+    position: relative;
+}
+
+/* Background dim overlay */
+.all-cans-container.has-focus::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 50;
+    pointer-events: none;
+    animation: fadeInDim 0.4s ease forwards;
+}
+
+@keyframes fadeInDim {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Focused can - larger scale, sharp, prominent */
+.cta-can.focused {
+    z-index: 100;
+    transition:
+        transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.4s ease,
+        filter 0.4s ease !important;
+    pointer-events: auto;
+}
+
+.cta-can.focused img {
+    animation: focusedFloat 2.5s ease-in-out infinite !important;
+    filter: drop-shadow(0 35px 70px rgba(0, 0, 0, 0.6)) !important;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Floating animation for focused can */
+@keyframes focusedFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1) rotateZ(0deg);
+    }
+
+    50% {
+        transform: translateY(-15px) scale(1.02) rotateZ(0.5deg);
+    }
+}
+
+/* Unfocused cans - subtle fade, minimal blur, still visible */
+.cta-can.unfocused {
+    opacity: 0.5 !important;
+    filter: blur(1.5px) brightness(0.7);
+    transform: scale(0.92) !important;
+    pointer-events: none;
+    z-index: 60;
+    transition:
+        transform 0.5s cubic-bezier(0.33, 1, 0.68, 1),
+        opacity 0.4s ease,
+        filter 0.4s ease !important;
+}
+
+.cta-can.unfocused img {
+    animation: none !important;
+}
+
+.cta-can.unfocused .can-label {
+    opacity: 0.5;
+}
+
+/* CTA Button */
+.cta-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem 3rem;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    color: var(--white);
+    background: linear-gradient(135deg, var(--dragon-primary), var(--cotton-secondary));
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s var(--transition-smooth), box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 40px rgba(155, 77, 202, 0.4);
+}
+
+.cta-button span {
+    position: relative;
+    z-index: 2;
+}
+
+.button-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    transition: width 0.5s ease, height 0.5s ease;
+}
+
+.cta-button:hover .button-glow {
+    width: 300px;
+    height: 300px;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 1024px) {
+    .can-wrapper {
+        right: 5%;
+    }
+
+    .can-image {
+        width: 220px;
+    }
+
+    .flavor-section .content-wrapper {
+        left: 5%;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .can-wrapper {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        margin-top: 2rem;
+    }
+
+    .hero-section,
+    .flavor-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 4rem 1rem;
+    }
+
+    .flavor-section .content-wrapper {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .flavor-details {
+        justify-content: center;
+    }
+
+    .can-image {
+        width: 180px;
+    }
+
+    .cta-can img {
+        width: 80px;
+    }
+
+    .all-cans-container {
+        gap: 1rem;
+    }
+}
+
+/* ============================================
+   CAN SHARPNESS (Motion blur removed)
+   ============================================ */
+.motion-blur {
+    /* Blur disabled for sharpness */
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+}
+
+.motion-blur-off {
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+}
+
+/* ============================================
+   SPARKS EFFECT (Zero Ultra)
+   ============================================ */
+.sparks-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.spark {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    animation: sparkFloat 4s ease-out infinite;
+}
+
+@keyframes sparkFloat {
+    0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+        transform: translateY(80vh) scale(1);
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-20vh) scale(0);
+        opacity: 0;
+    }
+}
